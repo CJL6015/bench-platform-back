@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.SystemTypeCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.SystemTypeCfg">
+            <result property="systemTypeId" column="System_type_id" jdbcType="INTEGER"/>
+            <result property="systemTypeName" column="System_type_name" jdbcType="VARCHAR"/>
+            <result property="systemTypeShortname" column="System_type_Shortname" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        System_type_id,System_type_name,System_type_Shortname
+    </sql>
+</mapper>

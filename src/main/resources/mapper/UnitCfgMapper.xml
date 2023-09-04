@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.UnitCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.UnitCfg">
+            <result property="unitId" column="Unit_ID" jdbcType="INTEGER"/>
+            <result property="plantId" column="Plant_ID" jdbcType="INTEGER"/>
+            <result property="unitName" column="Unit_Name" jdbcType="VARCHAR"/>
+            <result property="unitShortname" column="Unit_ShortName" jdbcType="VARCHAR"/>
+            <result property="预警标准训练样本" column="预警标准训练样本" jdbcType="VARCHAR"/>
+            <result property="loadpoint" column="LoadPoint" jdbcType="VARCHAR"/>
+            <result property="temppoint" column="TempPoint" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Unit_ID,Plant_ID,Unit_Name,
+        Unit_ShortName,预警标准训练样本,LoadPoint,
+        TempPoint
+    </sql>
+</mapper>

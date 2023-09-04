@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.InstantCalcLogMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.InstantCalcLog">
+            <result property="模型实例计算数量" column="模型实例计算数量" jdbcType="INTEGER"/>
+            <result property="运行状态" column="运行状态" jdbcType="VARCHAR"/>
+            <result property="日志插入时间" column="日志插入时间" jdbcType="TIMESTAMP"/>
+            <result property="读取配置耗时" column="读取配置耗时" jdbcType="FLOAT"/>
+            <result property="json解析1耗时" column="Json解析1耗时" jdbcType="FLOAT"/>
+            <result property="读exa耗时" column="读EXA耗时" jdbcType="FLOAT"/>
+            <result property="调python模型计算" column="调python模型计算" jdbcType="FLOAT"/>
+            <result property="写exa耗时" column="写EXA耗时" jdbcType="FLOAT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        模型实例计算数量,运行状态,日志插入时间,
+        读取配置耗时,Json解析1耗时,读EXA耗时,
+        调python模型计算,写EXA耗时
+    </sql>
+</mapper>

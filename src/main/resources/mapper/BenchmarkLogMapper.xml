@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.BenchmarkLogMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.BenchmarkLog">
+            <result property="nno" column="Nno" jdbcType="INTEGER"/>
+            <result property="modelId" column="model_id" jdbcType="INTEGER"/>
+            <result property="calcLog" column="calc_log" jdbcType="VARCHAR"/>
+            <result property="insertTime" column="insert_time" jdbcType="TIMESTAMP"/>
+            <result property="samplenumber" column="SampleNumber" jdbcType="INTEGER"/>
+            <result property="timeComsumption" column="time_comsumption" jdbcType="FLOAT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Nno,model_id,calc_log,
+        insert_time,SampleNumber,time_comsumption
+    </sql>
+</mapper>

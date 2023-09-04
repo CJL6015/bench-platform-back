@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.AlarmTypeCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.AlarmTypeCfg">
+            <result property="unitId" column="UNIT_ID" jdbcType="INTEGER"/>
+            <result property="alarmTypeId" column="ALARM_TYPE_ID" jdbcType="INTEGER"/>
+            <result property="alarmName" column="ALARM_NAME" jdbcType="VARCHAR"/>
+            <result property="alarmThershold" column="ALARM_THERSHOLD" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        UNIT_ID,ALARM_TYPE_ID,ALARM_NAME,
+        ALARM_THERSHOLD
+    </sql>
+</mapper>

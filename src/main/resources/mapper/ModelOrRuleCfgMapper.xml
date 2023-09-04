@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.ModelOrRuleCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.ModelOrRuleCfg">
+            <result property="modelOrRule" column="MODEL_OR_RULE" jdbcType="INTEGER"/>
+            <result property="modelOrRuleName" column="MODEL_OR_RULE_NAME" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        MODEL_OR_RULE,MODEL_OR_RULE_NAME
+    </sql>
+</mapper>

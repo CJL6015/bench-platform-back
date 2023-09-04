@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.ModelCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.ModelCfg">
+            <id property="modelId" column="Model_ID" jdbcType="INTEGER"/>
+            <result property="systemId" column="System_ID" jdbcType="INTEGER"/>
+            <result property="algorithmId" column="Algorithm_ID" jdbcType="INTEGER"/>
+            <result property="modelName" column="Model_Name" jdbcType="VARCHAR"/>
+            <result property="creatTime" column="Creat_Time" jdbcType="TIMESTAMP"/>
+            <result property="creatName" column="Creat_Name" jdbcType="VARCHAR"/>
+            <result property="modelInfo" column="Model_Info" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="visible" column="VISIBLE" jdbcType="INTEGER"/>
+            <result property="condition" column="Condition" jdbcType="VARCHAR"/>
+            <result property="trash" column="trash" jdbcType="INTEGER"/>
+            <result property="marktype" column="marktype" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Model_ID,System_ID,Algorithm_ID,
+        Model_Name,Creat_Time,Creat_Name,
+        Model_Info,status,VISIBLE,
+        Condition,trash,marktype
+    </sql>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.AreaCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.AreaCfg">
+            <result property="areaId" column="Area_id" jdbcType="INTEGER"/>
+            <result property="areaName" column="Area_Name" jdbcType="VARCHAR"/>
+            <result property="areaShortname" column="Area_ShortName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Area_id,Area_Name,Area_ShortName
+    </sql>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.InstantCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.InstantCfg">
+            <result property="mpId" column="MP_ID" jdbcType="INTEGER"/>
+            <result property="modelId" column="MODEL_ID" jdbcType="INTEGER"/>
+            <result property="mpName" column="MP_NAME" jdbcType="VARCHAR"/>
+            <result property="instantInfo" column="INSTANT_INFO" jdbcType="VARCHAR"/>
+            <result property="interval" column="INTERVAL" jdbcType="INTEGER"/>
+            <result property="hisSto" column="HIS_STO" jdbcType="INTEGER"/>
+            <result property="visible" column="VISIBLE" jdbcType="INTEGER"/>
+            <result property="status" column="STATUS" jdbcType="INTEGER"/>
+            <result property="setupTime" column="SETUP_TIME" jdbcType="TIMESTAMP"/>
+            <result property="newestUpdateTime" column="NEWEST_UPDATE_TIME" jdbcType="VARCHAR"/>
+            <result property="running" column="RUNNING" jdbcType="CHAR"/>
+            <result property="runningLog" column="RUNNING_LOG" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        MP_ID,MODEL_ID,MP_NAME,
+        INSTANT_INFO,INTERVAL,HIS_STO,
+        VISIBLE,STATUS,SETUP_TIME,
+        NEWEST_UPDATE_TIME,RUNNING,RUNNING_LOG
+    </sql>
+</mapper>

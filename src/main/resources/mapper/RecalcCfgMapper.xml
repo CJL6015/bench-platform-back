@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.RecalcCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.RecalcCfg">
+            <result property="nno" column="Nno" jdbcType="INTEGER"/>
+            <result property="modelId" column="model_id" jdbcType="INTEGER"/>
+            <result property="starttime" column="starttime" jdbcType="TIMESTAMP"/>
+            <result property="endtime" column="endtime" jdbcType="TIMESTAMP"/>
+            <result property="visible" column="visible" jdbcType="INTEGER"/>
+            <result property="process" column="process" jdbcType="FLOAT"/>
+            <result property="inserttime" column="inserttime" jdbcType="TIMESTAMP"/>
+            <result property="samplenumber" column="SampleNumber" jdbcType="INTEGER"/>
+            <result property="computetime" column="ComputeTime" jdbcType="FLOAT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Nno,model_id,starttime,
+        endtime,visible,process,
+        inserttime,SampleNumber,ComputeTime
+    </sql>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.ModelConditionMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.ModelCondition">
+            <result property="algorithm" column="algorithm" jdbcType="VARCHAR"/>
+            <result property="condition" column="condition" jdbcType="VARCHAR"/>
+            <result property="id" column="id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        algorithm,condition,id
+    </sql>
+</mapper>

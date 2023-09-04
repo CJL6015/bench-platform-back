@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.PlantCfgMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.PlantCfg">
+            <result property="plantId" column="Plant_ID" jdbcType="INTEGER"/>
+            <result property="areaId" column="Area_ID" jdbcType="INTEGER"/>
+            <result property="plantName" column="Plant_Name" jdbcType="VARCHAR"/>
+            <result property="plantShortname" column="Plant_ShortName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Plant_ID,Area_ID,Plant_Name,
+        Plant_ShortName
+    </sql>
+</mapper>
