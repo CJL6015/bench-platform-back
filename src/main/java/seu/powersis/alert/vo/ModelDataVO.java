@@ -22,9 +22,14 @@ public class ModelDataVO {
     /**
      * 参数个数
      */
-    private List<Integer> sampleValue;
+    private int[] sampleValue;
     /**
      * 边界数据
      */
     private List<List<Double>> dataList;
+
+    /**
+     * 热力图数据
+     */
+    private List<int[]> heatData;
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author 陈小黑
 * @description 针对表【benchmark_history】的数据库操作Service实现
-* @createDate 2023-08-15 23:01:41
+* @createDate 2023-09-12 22:36:41
 */
 @Service
 public class BenchmarkHistoryServiceImpl extends ServiceImpl<BenchmarkHistoryMapper, BenchmarkHistory>
