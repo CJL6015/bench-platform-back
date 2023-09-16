@@ -12,6 +12,7 @@ import seu.powersis.alert.vo.ModelDataVO;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,11 +28,13 @@ public class ModelDataServiceImpl implements ModelDataService {
     private final BenchmarkHistoryService benchmarkHistoryService;
 
     @Override
-    public ModelDataVO getModelData(Integer modelId, String type, List<Integer> indexList) {
+    public ModelDataVO getModelData(Integer modelId, String type, List<Integer> indexList, Date st, Date et) {
 
         LambdaQueryWrapper<BenchmarkHistory> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(BenchmarkHistory::getModelId, modelId)
-                .eq(StringUtils.hasText(type), BenchmarkHistory::getType, type);
+                .eq(StringUtils.hasText(type), BenchmarkHistory::getType, type)
+                .ge(BenchmarkHistory::getStarttime, st)
+                .le(BenchmarkHistory::getEndtime, et);
         List<BenchmarkHistory> list = benchmarkHistoryService.list(queryWrapper);
         List<Double> targetValue = new ArrayList<>();
         int[] sampleValue = new int[10];
