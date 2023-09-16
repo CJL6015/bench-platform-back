@@ -50,15 +50,8 @@ public class SelectController {
     @GetMapping("/point/options")
     public Result<List<PointOptionItemVO>> getPointOptions(String keyword) {
         List<PointOptionItemVO> pointOptionList = new ArrayList<>();
-        if (StringUtils.hasText(keyword) || keyword.contains(EXA_NOT_SUPPORT_STR)) {
+        if (StringUtils.hasText(keyword) && !keyword.contains(EXA_NOT_SUPPORT_STR)) {
             pointOptionList = exaService.getPointOptionList(keyword);
-        }
-        // TODO: 2023-08-20 测试用之后删除
-        if (CollectionUtils.isEmpty(pointOptionList)) {
-            pointOptionList.add(PointOptionItemVO.builder()
-                    .id("测试点号|pointId|℃|10|0")
-                    .name("测试点号需删除")
-                    .build());
         }
         return Result.success(pointOptionList);
     }

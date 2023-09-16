@@ -44,7 +44,7 @@ public class ExaServiceImpl implements ExaService {
             Map<String, Object> params = new HashMap<>(4);
             params.put(EXA_SEARCH_KEY, whereClause);
             String body = HttpUtil.get(getItemsUrl, params);
-            if (!StringUtils.hasLength(body) || body.contains("null")) {
+            if (!StringUtils.hasLength(body)) {
                 log.error("获取exa异常:{}", search);
                 return new ArrayList<>();
             }
