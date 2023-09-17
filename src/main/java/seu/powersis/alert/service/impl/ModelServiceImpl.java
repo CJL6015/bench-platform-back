@@ -2,6 +2,7 @@ package seu.powersis.alert.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -103,11 +104,31 @@ public class ModelServiceImpl implements ModelService {
                     .modelInfo(objectMapper.writeValueAsString(info))
                     .build();
             modelCfgService.save(cfg);
+            info.setId(cfg.getModelId());
+            cfg.setModelInfo(objectMapper.writeValueAsString(info));
+            modelCfgService.updateById(cfg);
             return cfg.getModelId();
         } catch (JsonProcessingException e) {
             log.error("新建模型异常,model:{}", model);
         }
 
         return -1;
+    }
+
+    @Override
+    public Boolean updateModelInfo(ModelInfoVO modelInfo) {
+        ModelInfo entity = new ModelInfo();
+        try {
+            BeanUtil.copyProperties(modelInfo, entity);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String info = objectMapper.writeValueAsString(entity);
+            LambdaUpdateWrapper<ModelCfg> updateWrapper = new LambdaUpdateWrapper<>();
+            updateWrapper.set(ModelCfg::getModelInfo, info)
+                    .eq(ModelCfg::getModelId, modelInfo.getId());
+            return modelCfgService.update(updateWrapper);
+        } catch (JsonProcessingException e) {
+            log.error("模型序列化异常,{}", entity, e);
+        }
+        return false;
     }
 }

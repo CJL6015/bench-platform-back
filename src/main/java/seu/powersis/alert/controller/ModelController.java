@@ -1,5 +1,7 @@
 package seu.powersis.alert.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import seu.powersis.alert.common.model.Result;
@@ -43,5 +45,11 @@ public class ModelController {
         return Result.success(id);
         }
         return Result.fail("新建模型异常");
+    }
+
+    @PatchMapping("/info")
+    public Result<Boolean> updateModelInfo(@RequestBody ModelInfoVO vo) {
+        Boolean b = modelService.updateModelInfo(vo);
+        return Result.success(b);
     }
 }

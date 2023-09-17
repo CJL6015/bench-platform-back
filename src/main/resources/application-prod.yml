@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://192.168.101.2;databaseName=benchmarking
+    url: jdbc:sqlserver://benchmark.sql.com;databaseName=benchmarking
     username: sa
     password: powerSIS#123
 exa:
-  host: 192.168.101.1:9000
+  host: exa.com:9000

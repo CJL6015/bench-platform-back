@@ -36,4 +36,12 @@ public interface ModelService {
      * @return 模型id
      */
     Integer createModel(CreateModelInfo model);
+
+    /**
+     * 更新model info
+     *
+     * @param info 模型info
+     * @return 是否成功
+     */
+    Boolean updateModelInfo(ModelInfoVO info);
 }
