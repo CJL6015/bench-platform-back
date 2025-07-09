@@ -17,6 +17,7 @@ public class SystemTypeCfg implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Integer systemTypeId;
 
     /**

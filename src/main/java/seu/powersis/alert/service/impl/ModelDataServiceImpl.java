@@ -1,5 +1,7 @@
 package seu.powersis.alert.service.impl;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author chenjiale
@@ -51,12 +54,22 @@ public class ModelDataServiceImpl implements ModelDataService {
                 Integer index = indexList.get(i);
                 String propertyName = "b" + (index + 1);
                 String indexName = "b" + (index + 1) + "Id";
-                int sampleIndex = ((int) benchmarkHistory.getPropertyByName(indexName)) - 1;
-                sampleValue[sampleIndex] += benchmarkHistory.getSamplenum();
+                Object propertyByName = benchmarkHistory.getPropertyByName(indexName);
+                if (Objects.nonNull(propertyByName)) {
+                    int sampleIndex = ((int) propertyByName) - 1;
+                    sampleValue[sampleIndex] += benchmarkHistory.getSamplenum();
+                }
+
                 List<Double> data = dataList.get(i);
-                double property = (double) benchmarkHistory.getPropertyByName(propertyName);
-                property = Double.parseDouble(decimalFormat.format(property));
-                data.add(property);
+                Object propertyByName1 = benchmarkHistory.getPropertyByName(propertyName);
+                if (Objects.nonNull(propertyByName1)) {
+                    double property = (double) propertyByName1;
+                    property = Double.parseDouble(decimalFormat.format(property));
+                    data.add(property);
+                } else {
+                    data.add(-9999D);
+                }
+
             }
             String bId = benchmarkHistory.getBId();
             String[] split = bId.split("-");

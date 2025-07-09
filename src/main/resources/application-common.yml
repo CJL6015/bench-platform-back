@@ -22,3 +22,4 @@ logging:
     com.baomidou.mybatisplus: debug
 exa:
   get-item-url: ${exa.host}/exawebapi/exaitem/getitems
+  get-values: ${exa.host}/exawebapi/exanow/GetFloatValueBatchPost

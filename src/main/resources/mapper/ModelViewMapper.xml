@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.powersis.alert.dao.mapper.ModelViewMapper">
+
+    <resultMap id="BaseResultMap" type="seu.powersis.alert.dao.entity.ModelView">
+            <result property="modelId" column="Model_ID" jdbcType="INTEGER"/>
+            <result property="systemId" column="System_ID" jdbcType="INTEGER"/>
+            <result property="algorithmId" column="Algorithm_ID" jdbcType="INTEGER"/>
+            <result property="modelName" column="Model_Name" jdbcType="VARCHAR"/>
+            <result property="creatTime" column="Creat_Time" jdbcType="TIMESTAMP"/>
+            <result property="creatName" column="Creat_Name" jdbcType="VARCHAR"/>
+            <result property="modelInfo" column="Model_Info" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="systemTypeId" column="System_type_ID" jdbcType="INTEGER"/>
+            <result property="systemShortname" column="System_ShortName" jdbcType="VARCHAR"/>
+            <result property="systemName" column="System_Name" jdbcType="VARCHAR"/>
+            <result property="unitId" column="unit_id" jdbcType="INTEGER"/>
+            <result property="systemTypeName" column="System_type_name" jdbcType="VARCHAR"/>
+            <result property="systemTypeShortname" column="System_type_Shortname" jdbcType="VARCHAR"/>
+            <result property="plantId" column="Plant_ID" jdbcType="INTEGER"/>
+            <result property="unitName" column="Unit_Name" jdbcType="VARCHAR"/>
+            <result property="unitShortname" column="Unit_ShortName" jdbcType="VARCHAR"/>
+            <result property="areaName" column="Area_Name" jdbcType="VARCHAR"/>
+            <result property="areaShortname" column="Area_ShortName" jdbcType="VARCHAR"/>
+            <result property="plantName" column="Plant_Name" jdbcType="VARCHAR"/>
+            <result property="plantShortname" column="Plant_ShortName" jdbcType="VARCHAR"/>
+            <result property="areaId" column="Area_ID" jdbcType="INTEGER"/>
+            <result property="instantNum" column="instant_num" jdbcType="INTEGER"/>
+            <result property="visible" column="VISIBLE" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Model_ID,System_ID,Algorithm_ID,
+        Model_Name,Creat_Time,Creat_Name,
+        Model_Info,status,System_type_ID,
+        System_ShortName,System_Name,unit_id,
+        System_type_name,System_type_Shortname,Plant_ID,
+        Unit_Name,Unit_ShortName,Area_Name,
+        Area_ShortName,Plant_Name,Plant_ShortName,
+        Area_ID,instant_num,VISIBLE
+    </sql>
+</mapper>

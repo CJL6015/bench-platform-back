@@ -1,12 +1,19 @@
 package seu.powersis.alert.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import seu.powersis.alert.common.model.ExaPoint;
@@ -37,6 +44,9 @@ public class ExaServiceImpl implements ExaService {
     @Value("${exa.get-item-url}")
     private String getItemsUrl;
 
+    @Value("${exa.get-values}")
+    private String getValuesUrl;
+
     @Override
     public List<PointOptionItemVO> getPointOptionList(String search) {
         try {
@@ -66,5 +76,29 @@ public class ExaServiceImpl implements ExaService {
             log.error("获取exa异常:{}", search, e);
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public Float[] getValues(List<String> points) {
+        Float[] res = new Float[points.size()];
+        Map<String, Object> body = new HashMap<>(2);
+        body.put("ItemNames", CollUtil.join(points, ","));
+        try (HttpResponse response = HttpUtil.createPost(getValuesUrl)
+                .body(JSON.toJSONString(body))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .execute()) {
+            String post = response.body();
+            JSONArray values = JSON.parseArray(post);
+            if (values.size() != points.size()) {
+                log.error("exa返回结果异常,points:{},返回结果:{}", points, post);
+                return res;
+            }
+            for (int i = 0; i < values.size(); i++) {
+                res[i] = values.getFloatValue(i);
+            }
+        } catch (Exception e) {
+            log.error("获取exa点号时实值异常,points:{}", points, e);
+        }
+        return res;
     }
 }

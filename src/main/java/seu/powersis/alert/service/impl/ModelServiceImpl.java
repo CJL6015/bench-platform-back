@@ -1,6 +1,7 @@
 package seu.powersis.alert.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,13 +16,18 @@ import seu.powersis.alert.common.enums.ModelStatus;
 import seu.powersis.alert.common.enums.ModelTrash;
 import seu.powersis.alert.common.enums.ModelVisible;
 import seu.powersis.alert.common.model.ModelInfo;
+import seu.powersis.alert.common.model.Point;
 import seu.powersis.alert.dao.entity.ModelCfg;
+import seu.powersis.alert.dao.entity.SystemCfg;
 import seu.powersis.alert.dao.service.ModelCfgService;
+import seu.powersis.alert.dao.service.SystemCfgService;
 import seu.powersis.alert.param.CreateModelInfo;
 import seu.powersis.alert.param.ModelSelectQuery;
+import seu.powersis.alert.service.ExaService;
 import seu.powersis.alert.service.ModelService;
 import seu.powersis.alert.vo.ModelInfoVO;
 import seu.powersis.alert.vo.ModelSimpleVO;
+import seu.powersis.alert.vo.PointVO;
 
 import java.util.Date;
 import java.util.List;
@@ -39,17 +45,30 @@ import java.util.stream.Collectors;
 public class ModelServiceImpl implements ModelService {
     private final ModelCfgService modelCfgService;
 
+    private final SystemCfgService systemCfgService;
+
+    private final ExaService exaService;
+
     @Override
     public List<ModelSimpleVO> getModelList(ModelSelectQuery query) {
         Integer systemId = query.getSystemId();
         String modelName = query.getName();
         Integer status = query.getStatus();
         Integer trash = query.getTrash();
+        Integer typeId = query.getTypeId();
+        List<Integer> systems = null;
+        if (Objects.nonNull(typeId)) {
+            LambdaQueryWrapper<SystemCfg> systemQuery = new LambdaQueryWrapper<>();
+            systemQuery.eq(SystemCfg::getSystemTypeId, typeId);
+            List<SystemCfg> list = systemCfgService.list(systemQuery);
+            systems = list.stream().map(SystemCfg::getSystemId).collect(Collectors.toList());
+        }
         LambdaQueryWrapper<ModelCfg> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Objects.nonNull(systemId), ModelCfg::getSystemId, systemId)
                 .eq(Objects.nonNull(status), ModelCfg::getStatus, status)
                 .eq(Objects.nonNull(trash), ModelCfg::getTrash, trash)
                 .eq(ModelCfg::getVisible, ModelVisible.VISIBLE.code)
+                .in(CollUtil.isNotEmpty(systems), ModelCfg::getSystemId, systems)
                 .like(StringUtils.hasLength(modelName), ModelCfg::getModelName, modelName);
         List<ModelCfg> list = modelCfgService.list(queryWrapper);
         return list.stream().map(modelCfg -> ModelSimpleVO.builder()
@@ -73,8 +92,27 @@ public class ModelServiceImpl implements ModelService {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             ModelInfo info = objectMapper.readValue(modelInfo, ModelInfo.class);
+            String targetPoint = info.getTargetParameter().getTargetPoint();
+            List<String> boundaryValue = info.getBoundaryParameter()
+                    .stream().map(Point::getTargetPoint)
+                    .collect(Collectors.toList());
+            List<String> relation = info.getRelationParameter().stream().map(Point::getTargetPoint)
+                    .collect(Collectors.toList());
+            boundaryValue.addAll(relation);
+            boundaryValue.add(targetPoint);
+            Float[] values = exaService.getValues(boundaryValue);
             ModelInfoVO vo = new ModelInfoVO();
             BeanUtil.copyProperties(info, vo);
+            int index = 0;
+            List<PointVO> boundaryParameter = vo.getBoundaryParameter();
+            for (PointVO pointVO : boundaryParameter) {
+                pointVO.setValue(values[index++]);
+            }
+            List<PointVO> relationParameter = vo.getRelationParameter();
+            for (PointVO pointVO : relationParameter) {
+                pointVO.setValue(values[index++]);
+            }
+            vo.getTargetParameter().setValue(values[index]);
             vo.setCreateName(model.getCreatName());
             vo.setCreateTime(model.getCreatTime());
             vo.setCondition(model.getCondition());

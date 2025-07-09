@@ -5,3 +5,5 @@ spring:
     password: powerSIS#123
 exa:
   host: 47.98.32.148:9000
+algorithm:
+  host: 47.98.32.148:8089

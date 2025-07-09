@@ -17,4 +17,6 @@ public interface ExaService {
      * @return 选项
      */
     List<PointOptionItemVO> getPointOptionList(String search);
+
+    public Float[] getValues(List<String> points);
 }

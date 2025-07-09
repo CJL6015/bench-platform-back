@@ -60,7 +60,7 @@ public class SelectServiceImpl implements SelectService {
                 .id(o.getSystemId())
                 .name(o.getSystemName().trim())
                 .build()).collect(Collectors.toList());
-
+        systems.add(0,OptionItemVO.builder().id(null).name("全部").build());
         return SelectAllOptionVO.builder()
                 .units(units)
                 .types(types)
@@ -77,10 +77,12 @@ public class SelectServiceImpl implements SelectService {
                 .eq(SystemCfg::getUnitId, unitId)
                 .orderByAsc(SystemCfg::getSystemId);
         List<SystemCfg> systemCfgList = systemCfgService.list(queryWrapper);
-        return systemCfgList.stream().map(o -> OptionItemVO.builder()
+        List<OptionItemVO> systems = systemCfgList.stream().map(o -> OptionItemVO.builder()
                         .id(o.getSystemId())
                         .name(o.getSystemName().trim())
                         .build())
                 .collect(Collectors.toList());
+        systems.add(0,OptionItemVO.builder().id(null).name("全部").build());
+        return systems;
     }
 }

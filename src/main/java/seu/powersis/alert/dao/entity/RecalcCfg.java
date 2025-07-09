@@ -18,6 +18,7 @@ public class RecalcCfg implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Integer nno;
 
     /**

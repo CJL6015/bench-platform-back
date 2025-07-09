@@ -57,4 +57,6 @@ public class PointVO {
      * 网格数
      */
     private Integer gridNumber;
+
+    private Float value;
 }

@@ -8,37 +8,27 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 
- * @TableName system_cfg
+ * 教学测试表
+ * @TableName teach_test
  */
-@TableName(value ="system_cfg")
+@TableName(value ="teach_test")
 @Data
-public class SystemCfg implements Serializable {
+public class TeachTest implements Serializable {
     /**
      * 
      */
     @TableId(type = IdType.AUTO)
-    private Integer systemId;
+    private Long id;
 
     /**
-     * 
+     * 名称
      */
-    private Integer systemTypeId;
+    private String name;
 
     /**
-     * 
+     * 年龄
      */
-    private String systemName;
-
-    /**
-     * 
-     */
-    private String systemShortname;
-
-    /**
-     * 
-     */
-    private Integer unitId;
+    private Integer age;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

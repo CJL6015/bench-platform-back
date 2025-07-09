@@ -17,6 +17,7 @@ public class PlantCfg implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Integer plantId;
 
     /**
